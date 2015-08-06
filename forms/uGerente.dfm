@@ -1,9 +1,10 @@
 object Gerente: TGerente
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'Sistema de Gest'#227'o de Mercados'
-  ClientHeight = 201
-  ClientWidth = 447
+  ClientHeight = 447
+  ClientWidth = 779
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
