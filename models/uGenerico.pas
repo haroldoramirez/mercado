@@ -14,10 +14,10 @@ interface
     public
         constructor crieObj;
         destructor destrua_se;
-        procedure setId(pId : Integer);
-        procedure setDescricao(pDescricao : String);
-        procedure setDataCadastro(pDataCadastro : TDateTime);
-        procedure setDataAlteracao(pDataAlteracao : TDateTime);
+        procedure setId(pId: Integer);
+        procedure setDescricao(pDescricao: String);
+        procedure setDataCadastro(pDataCadastro: TDateTime);
+        procedure setDataAlteracao(pDataAlteracao: TDateTime);
         function getId : Integer;
         function getDescricao : String;
         function getDataCadastro : TDateTime;
