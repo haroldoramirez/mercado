@@ -94,6 +94,17 @@
         <DCCReference Include="models\uFormaPagamento.pas"/>
         <DCCReference Include="models\uParcelas.pas"/>
         <DCCReference Include="models\uCondicaoPagamento.pas"/>
+        <DCCReference Include="models\uPais.pas"/>
+        <DCCReference Include="models\uEstado.pas"/>
+        <DCCReference Include="models\uCidade.pas"/>
+        <DCCReference Include="models\uEndereco.pas"/>
+        <DCCReference Include="models\uPessoa.pas"/>
+        <DCCReference Include="models\uCategoria.pas"/>
+        <DCCReference Include="models\uUnidade.pas"/>
+        <DCCReference Include="models\uMarca.pas"/>
+        <DCCReference Include="models\uProduto.pas"/>
+        <DCCReference Include="models\uCliente.pas"/>
+        <DCCReference Include="models\uFornecedor.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -502,18 +513,19 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">False</Platform>
             </Platforms>
+            <ModelSupport>False</ModelSupport>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
