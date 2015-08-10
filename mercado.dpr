@@ -19,7 +19,11 @@ uses
   uMarca in 'models\uMarca.pas',
   uProduto in 'models\uProduto.pas',
   uCliente in 'models\uCliente.pas',
-  uFornecedor in 'models\uFornecedor.pas';
+  uFornecedor in 'models\uFornecedor.pas',
+  uAplicacao in 'uAplicacao.pas',
+  uInter in 'uInter.pas',
+  uCadastroPai in 'forms\uCadastroPai.pas' {CadastroPai},
+  uConsultaPai in 'forms\uConsultaPai.pas' {ConsultaPai};
 
 {$R *.res}
 
@@ -28,5 +32,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.Title := '';
   Application.CreateForm(TGerente, Gerente);
+  Application.CreateForm(TCadastroPai, CadastroPai);
+  Application.CreateForm(TConsultaPai, ConsultaPai);
   Application.Run;
 end.
