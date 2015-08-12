@@ -23,16 +23,20 @@ uses
   uAplicacao in 'uAplicacao.pas',
   uInter in 'uInter.pas',
   uCadastroPai in 'forms\uCadastroPai.pas' {CadastroPai},
-  uConsultaPai in 'forms\uConsultaPai.pas' {ConsultaPai};
+  uConsultaPai in 'forms\uConsultaPai.pas' {ConsultaPai},
+  uDM in 'uDM.pas' {DM: TDataModule},
+  uFrmConsultaPais in 'forms\uFrmConsultaPais.pas' {ConsultaPais},
+  uFrmConsultaEstado in 'forms\uFrmConsultaEstado.pas' {ConsultaEstado},
+  uFrmConsultaCidade in 'forms\uFrmConsultaCidade.pas' {ConsultaCidade},
+  uFrmConsultaCliente in 'forms\uFrmConsultaCliente.pas' {ConsultaCliente};
 
 {$R *.res}
 
+var
+  umaAplicacao : Aplicacao;
+
 begin
-  Application.Initialize;
-  Application.MainFormOnTaskbar := True;
-  Application.Title := '';
-  Application.CreateForm(TGerente, Gerente);
-  Application.CreateForm(TCadastroPai, CadastroPai);
-  Application.CreateForm(TConsultaPai, ConsultaPai);
-  Application.Run;
+    umaAplicacao := Aplicacao.crieObj;
+    umaAplicacao.execute_se;
+    umaAplicacao.destrua_se;
 end.
