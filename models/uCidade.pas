@@ -6,7 +6,7 @@ interface
     type Cidade = class(Generico)
 
     protected
-        ddd : String[2];
+        ddd : String[4];
         umEstado : Estado;
     public
         constructor crieObj;

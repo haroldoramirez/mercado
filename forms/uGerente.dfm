@@ -13,6 +13,7 @@ object Gerente: TGerente
   Font.Style = []
   Menu = MainMenu
   OldCreateOrder = False
+  Position = poDefault
   PixelsPerInch = 96
   TextHeight = 13
   object MainMenu: TMainMenu

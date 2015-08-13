@@ -7,7 +7,7 @@ interface
 
     protected
         id : Integer;
-        descricao : String[100];
+        nome : String[50];
         dataCadastro : TDateTime;
         dataAlteracao : TDateTime;
 
@@ -15,11 +15,11 @@ interface
         constructor crieObj;
         destructor destrua_se;
         procedure setId(pId: Integer);
-        procedure setDescricao(pDescricao: String);
+        procedure setNome(pNome: String);
         procedure setDataCadastro(pDataCadastro: TDateTime);
         procedure setDataAlteracao(pDataAlteracao: TDateTime);
         function getId : Integer;
-        function getDescricao : String;
+        function getNome : String;
         function getDataCadastro : TDateTime;
         function getDataAlteracao : TDateTime;
     end;
@@ -34,7 +34,7 @@ var
 begin
     dataAtual := Date;
     id := 0;
-    descricao := '';
+    nome := '';
     dataCadastro := dataAtual;
     dataAlteracao := dataAtual;
 end;
@@ -54,9 +54,9 @@ begin
     Result := dataCadastro;
 end;
 
-function Generico.getDescricao: String;
+function Generico.getNome: String;
 begin
-    Result := descricao;
+    Result := nome;
 end;
 
 function Generico.getId: Integer;
@@ -74,9 +74,9 @@ begin
     dataCadastro := pDataCadastro;
 end;
 
-procedure Generico.setDescricao(pDescricao: String);
+procedure Generico.setNome(pNome: String);
 begin
-    descricao := pDescricao;
+    nome := pNome;
 end;
 
 procedure Generico.setId(pId: Integer);

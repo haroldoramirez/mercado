@@ -28,7 +28,11 @@ uses
   uFrmConsultaPais in 'forms\uFrmConsultaPais.pas' {ConsultaPais},
   uFrmConsultaEstado in 'forms\uFrmConsultaEstado.pas' {ConsultaEstado},
   uFrmConsultaCidade in 'forms\uFrmConsultaCidade.pas' {ConsultaCidade},
-  uFrmConsultaCliente in 'forms\uFrmConsultaCliente.pas' {ConsultaCliente};
+  uFrmConsultaCliente in 'forms\uFrmConsultaCliente.pas' {ConsultaCliente},
+  uControllerPais in 'controllers\uControllerPais.pas',
+  uDaoPais in 'dao\uDaoPais.pas',
+  uSingleton in 'uSingleton.pas',
+  uFrmCadastroPais in 'forms\uFrmCadastroPais.pas' {FrmCadastroPais};
 
 {$R *.res}
 

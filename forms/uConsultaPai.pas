@@ -11,7 +11,7 @@ type
   TConsultaPai = class(TForm)
     edt_Pesquisar: TEdit;
     btn_Pesquisar: TButton;
-    DBGrid1: TDBGrid;
+    gridConsulta: TDBGrid;
     btn_Novo: TButton;
     btn_Alterar: TButton;
     btn_Excluir: TButton;

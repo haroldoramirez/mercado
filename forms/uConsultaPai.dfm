@@ -29,7 +29,7 @@ object ConsultaPai: TConsultaPai
     TabOrder = 1
     OnClick = btn_PesquisarClick
   end
-  object DBGrid1: TDBGrid
+  object gridConsulta: TDBGrid
     Left = 17
     Top = 54
     Width = 689
