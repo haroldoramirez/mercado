@@ -1,5 +1,5 @@
 inherited ConsultaPais: TConsultaPais
-  Caption = 'Consulta Pais'
+  Caption = 'Consulta Pa'#237's'
   ExplicitWidth = 740
   ExplicitHeight = 448
   PixelsPerInch = 96

@@ -36,7 +36,7 @@ begin
   inherited;
   if umPais.getId <> 0 then
     umPais.crieObj;
-  umFrmCadastroPais.btn_Salvar.Caption := 'Salvar';
+  umFrmCadastroPais.btn_Salvar.Caption := '&Salvar';
   umFrmCadastroPais.conhecaObj(umPais, umaControllerPais);
   umFrmCadastroPais.ShowModal;
 end;

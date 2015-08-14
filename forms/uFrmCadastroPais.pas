@@ -5,19 +5,16 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroPai, Vcl.StdCtrls,
-  uPais, uControllerPais;
+  uPais, uControllerPais, Vcl.ComCtrls, Vcl.ExtCtrls;
 
 type
   TFrmCadastroPais = class(TCadastroPai)
-    lbl_Nome: TLabel;
     edt_Nome: TEdit;
-    edt_DataCadastro: TEdit;
-    edt_DataAlteracao: TEdit;
-    lbl_DataCadastro: TLabel;
-    lbl_DataAlteracao: TLabel;
+    lbl_Nome: TLabel;
     edt_Ddi: TEdit;
     lbl_Ddi: TLabel;
     procedure btn_SairClick(Sender: TObject);
+    procedure btn_SalvarClick(Sender: TObject);
   private
     { Private declarations }
     umPais : Pais;
@@ -43,6 +40,25 @@ procedure TFrmCadastroPais.btn_SairClick(Sender: TObject);
 begin
   inherited;
   self.habilitaCampos;
+end;
+
+procedure TFrmCadastroPais.btn_SalvarClick(Sender: TObject);
+var
+  msg : String;
+begin
+  inherited;
+  if edt_Nome.Text = '' then
+    begin
+      showmessage('O campo nome não pode estar em branco!');
+      edt_Nome.SetFocus;
+    end
+  else
+  if self.btn_Salvar.Caption = '&Salvar' then
+    begin
+      umPais.setNome(edt_Nome.Text);
+      umPais.setDdi(edt_Ddi.Text);
+      showMessage(umaControllerPais.Salvar(umPais));
+    end;
 end;
 
 procedure TFrmCadastroPais.carregaObj;

@@ -10,6 +10,7 @@ object DM: TDM
       'Server=localhost'
       'DriverID=PG')
     Connected = True
+    LoginPrompt = False
     Left = 64
     Top = 32
   end

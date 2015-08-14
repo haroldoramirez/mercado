@@ -185,22 +185,27 @@ begin
                   DQPais.Params.ParamByName('OLD_idpais').Value := umPais.getId;
                 end;
             end;
+
             DQPais.Params.ParamByName('nome').Value := umPais.getNome;
             DQPais.Params.ParamByName('ddi').Value := umPais.getDdi;
-            DQPais.Params.ParamByName('datacadastro').Value := umPais.getDataCadastro;
-            DQPais.Params.ParamByName('dataalteracao').Value := umPais.getDataAlteracao;
+            DQPais.Params.ParamByName('datacadastro').Value := now;
+            DQPais.Params.ParamByName('dataalteracao').Value := now;
 
             DQPais.ExecSQL;
+
             Commit;
-            result := 'País salvo com sucesso!';
+
+            Result := 'País salvo com sucesso!';
         except
           on e: Exception do
           begin
               rollback;
+
               Result := 'Ocorreu um erro! País não foi salvo. Erro: '+e.Message;
           end;
         end;
     end;
+
     Self.AtualizaGrid;
 end;
 
