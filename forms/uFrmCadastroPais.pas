@@ -57,13 +57,23 @@ begin
     begin
       umPais.setNome(edt_Nome.Text);
       umPais.setDdi(edt_Ddi.Text);
+
       showMessage(umaControllerPais.Salvar(umPais));
+    end
+    else
+    begin
+      ShowMessage(umaControllerPais.Excluir(umPais));
+      self.Close;
     end;
 end;
 
 procedure TFrmCadastroPais.carregaObj;
 begin
-
+    self.edt_Codigo.Text := inttostr(umPais.getId);
+    self.edt_Nome.Text := umPais.getNome;
+    self.edt_Ddi.Text := umPais.getDdi;
+    self.dataStatus.Panels[0].Text := 'Data de Cadastro: '+datetoStr(umPais.getDataCadastro);
+    self.dataStatus.Panels[1].Text := 'Data de Alteração: '+datetoStr(umPais.getDataAlteracao);
 end;
 
 procedure TFrmCadastroPais.conhecaObj(pPais: Pais;
@@ -71,6 +81,7 @@ procedure TFrmCadastroPais.conhecaObj(pPais: Pais;
 begin
     umPais := pPais;
     umaControllerPais := pControllerPais;
+
     self.habilitaCampos;
     self.limpaCampos;
 end;
@@ -82,7 +93,9 @@ end;
 
 procedure TFrmCadastroPais.limpaCampos;
 begin
-
+    self.edt_Nome.Clear;
+    self.edt_Ddi.Clear;
+    self.edt_Codigo.Clear;
 end;
 
 end.

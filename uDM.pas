@@ -31,9 +31,6 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure beginTrans;
-    procedure Commit;
-    procedure rollback;
   end;
 
 var
@@ -46,20 +43,5 @@ implementation
 {$R *.dfm}
 
 { TDM }
-
-procedure TDM.beginTrans;
-begin
-    self.Mercado.StartTransaction;
-end;
-
-procedure TDM.Commit;
-begin
-    self.Mercado.Commit;
-end;
-
-procedure TDM.rollback;
-begin
-    self.Mercado.Rollback;
-end;
 
 end.

@@ -60,13 +60,11 @@ object CadastroPai: TCadastroPai
     Height = 19
     Panels = <
       item
-        Width = 50
+        Width = 200
       end
       item
-        Width = 50
+        Width = 200
       end>
-    ExplicitLeft = 104
-    ExplicitTop = 256
-    ExplicitWidth = 0
+    ExplicitLeft = 8
   end
 end

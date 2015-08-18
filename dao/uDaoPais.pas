@@ -46,9 +46,6 @@ end;
 
 function DaoPais.GetDS: TDataSource;
 begin
-    umDM.DQPais.FieldByName('nome').DisplayWidth := 50;
-    umDM.DQPais.FieldByName('datacadastro').DisplayWidth := 7;
-    umDM.DQPais.FieldByName('dataalteracao').DisplayWidth := 7;
     Self.AtualizaGrid;
     Result := umDM.DSPais;
 end;
@@ -101,15 +98,15 @@ begin
     umPais := Pais(pObj);
     with umDM do
     begin
-        if not DQPais.Active then
-            DQPais.Open;
+      if not DQPais.Active then
+          DQPais.Open;
 
-        if umPais.getId <> 0 then
-          begin
-            DQPais.Close;
-            DQPais.SQL.Text := 'select * from pais where idpais = '+IntToStr(umPais.getId);
-            DQPais.Open;
-          end;
+      if umPais.getId <> 0 then
+        begin
+          DQPais.Close;
+          DQPais.SQL.Text := 'select * from pais where idpais = '+IntToStr(umPais.getId);
+          DQPais.Open;
+        end;
 
         umPais.setId(DQPaisidPais.AsInteger);
         umPais.setNome(DQPaisnome.AsString);
@@ -117,8 +114,8 @@ begin
         umPais.setDataCadastro(DQPaisdatacadastro.AsDateTime);
         umPais.setDataAlteracao(DQPaisdataalteracao.AsDateTime);
     end;
-    result := umPais;
     Self.AtualizaGrid;
+    result := umPais;
 end;
 
 //verificar
@@ -130,16 +127,16 @@ begin
     with umDM do
     begin
         try
-          beginTrans;
+          //beginTrans;
           //DQPais.SQL := UpdatePais.DeleteSQL;
           DQPais.Params.ParamByName('OLD_idpais').Value := umPais.getId;
           DQPais.ExecSQL;
-          Commit;
+          //Commit;
           Result := 'País excluído com sucesso!';
         except
             on e:Exception do
             begin
-              rollback;
+              //rollback;
               if pos('chave estrangeira',e.Message)>0 then
                 Result := 'Ocorreu um erro! O País não pode ser excluído pois ja está sendo usado pelo sistema.'
               else
@@ -150,63 +147,50 @@ begin
     Self.AtualizaGrid;
 end;
 
-//verificar
 function DaoPais.Salvar(pObj: TObject): string;
 var
-    umPais : Pais;
+  umPais : Pais;
+  msg : String;
 begin
     umPais := Pais(pObj);
-    with umDM do
-    begin
-        try
-            beginTrans;
-            DQPais.Close;
-            if umPais.getId = 0 then
-            begin
-                if(Self.Buscar(umPais)) then
-                begin
-                  Result := 'Esse País já existe!';
-                  Self.AtualizaGrid;
-                  Exit;
-                end;
-                //DQPais.SQL := UpdatePais.InsertSQL
-            end
-            else
-            begin
-                if(not Self.Buscar(umPais)) then
-                begin
-                  Result := 'Esse País já existe!';
-                  Self.AtualizaGrid;
-                  Exit;
-                end
-                else
-                begin
-                  //DQPais.SQL := UpdatePais.ModifySQL;
-                  DQPais.Params.ParamByName('OLD_idpais').Value := umPais.getId;
-                end;
-            end;
+    try
+      if not umDM.FDTransaction.Active then
+        umDM.FDTransaction.StartTransaction;
 
-            DQPais.Params.ParamByName('nome').Value := umPais.getNome;
-            DQPais.Params.ParamByName('ddi').Value := umPais.getDdi;
-            DQPais.Params.ParamByName('datacadastro').Value := now;
-            DQPais.Params.ParamByName('dataalteracao').Value := now;
+      if not umDM.DQPais.Active then
+        umDM.DQPais.Open();
 
-            DQPais.ExecSQL;
-
-            Commit;
-
-            Result := 'País salvo com sucesso!';
-        except
-          on e: Exception do
+      if umPais.getId = 0 then
+        begin
+        if (Self.Buscar(umPais)) then
           begin
-              rollback;
-
-              Result := 'Ocorreu um erro! País não foi salvo. Erro: '+e.Message;
+            Result := 'País "'+umPais.getNome+'" já esta cadastrado no sistema!';
+            Self.AtualizaGrid;
+            Exit;
           end;
-        end;
+
+          umDM.DQPais.Insert;
+          umDM.DQPaisdatacadastro.Value := now;
+        end
+      else
+        umDM.DQPais.Edit;
+
+      umDM.DQPaisdataalteracao.Value := now;
+      umDM.DQPaisnome.Value := umPais.getNome;
+      umDM.DQPaisddi.Value := umPais.getDdi;
+
+      umDM.DQPais.Post;
+      umDM.FDTransaction.Commit;
+
+      msg := 'O Pais "' + umPais.getNome + '" foi salvo com sucesso!';
+    except
+    on e: Exception do
+      begin
+        umDM.FDTransaction.Rollback;
+        msg := 'Nao foi possivel salvar o Pais ' + umPais.getNome + 'Erro:'+e.Message;;
+      end;
     end;
-
     Self.AtualizaGrid;
+    Result := msg;
 end;
-
 end.

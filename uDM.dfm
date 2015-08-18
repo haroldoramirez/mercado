@@ -34,6 +34,7 @@ object DM: TDM
     Top = 192
   end
   object DQPais: TFDQuery
+    Active = True
     Connection = Mercado
     SQL.Strings = (
       'select * from pais')
