@@ -29,25 +29,13 @@ object ConsultaPai: TConsultaPai
     TabOrder = 1
     OnClick = btn_PesquisarClick
   end
-  object gridConsulta: TDBGrid
-    Left = 17
-    Top = 54
-    Width = 689
-    Height = 305
-    TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-  end
   object btn_Novo: TButton
     Left = 331
     Top = 373
     Width = 76
     Height = 25
     Caption = '&Novo'
-    TabOrder = 3
+    TabOrder = 2
     OnClick = btn_NovoClick
   end
   object btn_Alterar: TButton
@@ -56,7 +44,7 @@ object ConsultaPai: TConsultaPai
     Width = 75
     Height = 25
     Caption = '&Alterar'
-    TabOrder = 4
+    TabOrder = 3
     OnClick = btn_AlterarClick
   end
   object btn_Excluir: TButton
@@ -65,7 +53,7 @@ object ConsultaPai: TConsultaPai
     Width = 75
     Height = 25
     Caption = '&Excluir'
-    TabOrder = 5
+    TabOrder = 4
     OnClick = btn_ExcluirClick
   end
   object btn_Sair: TButton
@@ -74,7 +62,19 @@ object ConsultaPai: TConsultaPai
     Width = 75
     Height = 25
     Caption = '&Sair'
-    TabOrder = 6
+    TabOrder = 5
     OnClick = btn_SairClick
+  end
+  object gridConsulta: TDBGrid
+    Left = 17
+    Top = 46
+    Width = 689
+    Height = 307
+    TabOrder = 6
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
   end
 end

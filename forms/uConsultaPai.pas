@@ -11,11 +11,11 @@ type
   TConsultaPai = class(TForm)
     edt_Pesquisar: TEdit;
     btn_Pesquisar: TButton;
-    gridConsulta: TDBGrid;
     btn_Novo: TButton;
     btn_Alterar: TButton;
     btn_Excluir: TButton;
     btn_Sair: TButton;
+    gridConsulta: TDBGrid;
     procedure btn_NovoClick(Sender: TObject);
     procedure btn_AlterarClick(Sender: TObject);
     procedure btn_ExcluirClick(Sender: TObject);

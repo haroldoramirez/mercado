@@ -45,6 +45,7 @@ end;
 procedure TFrmCadastroPais.btn_SalvarClick(Sender: TObject);
 var
   msg : String;
+  botaoSelecionado : Integer;
 begin
   inherited;
   if edt_Nome.Text = '' then
@@ -57,12 +58,14 @@ begin
     begin
       umPais.setNome(edt_Nome.Text);
       umPais.setDdi(edt_Ddi.Text);
-
+      self.Close;
       showMessage(umaControllerPais.Salvar(umPais));
     end
     else
     begin
-      ShowMessage(umaControllerPais.Excluir(umPais));
+      botaoSelecionado:= MessageDlg('ATENÇÃO! Deseja realmente excluir o Pais "' + umPais.getNome + '"',mtWarning, mbOKCancel, 0);
+      if botaoSelecionado = mrOK then
+        showMessage(umaControllerPais.Excluir(umPais));
       self.Close;
     end;
 end;
@@ -88,7 +91,8 @@ end;
 
 procedure TFrmCadastroPais.habilitaCampos;
 begin
-    self.btn_Salvar.Caption := '&Salvar';
+    self.edt_Nome.Enabled := true;
+    self.edt_Ddi.Enabled := true;
 end;
 
 procedure TFrmCadastroPais.limpaCampos;

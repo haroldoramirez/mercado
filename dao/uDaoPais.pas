@@ -118,33 +118,34 @@ begin
     result := umPais;
 end;
 
-//verificar
 function DaoPais.Excluir(pObj: TObject): string;
 var
-    umPais: Pais;
+  umPais : Pais;
+  msg : String;
 begin
     umPais := Pais(pObj);
-    with umDM do
-    begin
-        try
-          //beginTrans;
-          //DQPais.SQL := UpdatePais.DeleteSQL;
-          DQPais.Params.ParamByName('OLD_idpais').Value := umPais.getId;
-          DQPais.ExecSQL;
-          //Commit;
-          Result := 'País excluído com sucesso!';
-        except
-            on e:Exception do
-            begin
-              //rollback;
-              if pos('chave estrangeira',e.Message)>0 then
-                Result := 'Ocorreu um erro! O País não pode ser excluído pois ja está sendo usado pelo sistema.'
-              else
-                Result := 'Ocorreu um erro! País não foi excluído. Erro: '+e.Message;
-            end;
-        end;
+    try
+      if not umDM.FDTransaction.Active then
+        umDM.FDTransaction.StartTransaction;
+
+      if not umDM.DQPais.Active then
+        umDM.DQPais.Open();
+
+      umDM.DQPais.Delete;
+
+      umDM.FDTransaction.CommitRetaining;
+
+      msg := 'O País ' + umPais.getNome + ' Foi Excluido com sucesso!';
+
+    except
+    on e: Exception do
+      begin
+        umDM.FDTransaction.RollbackRetaining;
+        msg := 'Nao foi possivel excluir o Pais "' + umPais.getNome + '" Erro: '+e.Message;
+      end;
     end;
     Self.AtualizaGrid;
+    Result := msg;
 end;
 
 function DaoPais.Salvar(pObj: TObject): string;
@@ -187,7 +188,7 @@ begin
     on e: Exception do
       begin
         umDM.FDTransaction.Rollback;
-        msg := 'Nao foi possivel salvar o Pais ' + umPais.getNome + 'Erro:'+e.Message;;
+        msg := 'Nao foi possivel salvar o Pais ' + umPais.getNome + 'Erro: '+e.Message;
       end;
     end;
     Self.AtualizaGrid;

@@ -13,6 +13,8 @@ type
     procedure btn_PesquisarClick(Sender: TObject);
     procedure btn_NovoClick(Sender: TObject);
     procedure btn_AlterarClick(Sender: TObject);
+    procedure btn_ExcluirClick(Sender: TObject);
+    procedure btn_SairClick(Sender: TObject);
   private
     { Private declarations }
     umPais : Pais;
@@ -36,17 +38,36 @@ procedure TConsultaPais.btn_AlterarClick(Sender: TObject);
 begin
   inherited;
   umPais.setId(0);
-  umFrmCadastroPais := TFrmCadastroPais.Create(nil);
   umaControllerPais.Carrega(umPais);
+
   if (umPais.getId = 0) then
     MessageDlg('ATENÇÃO: Não há cadastro para ser editado!',mtWarning,[mbOK],0)
   else
-    with umFrmCadastroPais do
-    begin
-      conhecaObj(umPais,umaControllerPais);
-      carregaObj;
-      ShowModal;
-    end;
+  begin
+    umFrmCadastroPais.conhecaObj(umPais, umaControllerPais);
+    umFrmCadastroPais.btn_Salvar.Caption := '&Salvar';
+    umFrmCadastroPais.carregaObj;
+    umFrmCadastroPais.ShowModal;
+  end;
+end;
+
+procedure TConsultaPais.btn_ExcluirClick(Sender: TObject);
+begin
+  inherited;
+  umPais.setId(0);
+  umaControllerPais.Carrega(umPais);
+
+  if (umPais.getId = 0) then
+    MessageDlg('ATENÇÃO: Não há cadastro para ser excluido!',mtWarning,[mbOK],0)
+  else
+  begin
+    umFrmCadastroPais.conhecaObj(umPais, umaControllerPais);
+    umFrmCadastroPais.btn_Salvar.Caption := '&Excluir';
+    umFrmCadastroPais.carregaObj;
+    umFrmCadastroPais.edt_Nome.Enabled := false;
+    umFrmCadastroPais.edt_Ddi.Enabled := false;
+    umFrmCadastroPais.ShowModal;
+  end;
 end;
 
 procedure TConsultaPais.btn_NovoClick(Sender: TObject);
@@ -57,6 +78,7 @@ begin
 
   umFrmCadastroPais.btn_Salvar.Caption := '&Salvar';
   umFrmCadastroPais.conhecaObj(umPais, umaControllerPais);
+
   umFrmCadastroPais.ShowModal;
 end;
 
@@ -77,13 +99,24 @@ begin
   edt_Pesquisar.Clear;
 end;
 
+procedure TConsultaPais.btn_SairClick(Sender: TObject);
+begin
+  inherited;
+  if self.btn_Sair.Caption = '&Selecionar' then
+    begin
+      umPais.setId(0);
+      umaControllerPais.Carrega(umPais);
+    end;
+  self.Close;
+end;
+
 procedure TConsultaPais.conhecaObj(pObj: TObject);
 begin
-    umPais := Pais(pObj);
-    umaControllerPais := ControllerPais.crieObj;
-    self.gridConsulta.DataSource := umaControllerPais.GetDS;
-    self.edt_Pesquisar.Text := '';
-    umFrmCadastroPais := TFrmCadastroPais.Create(nil);
+  umPais := Pais(pObj);
+  umaControllerPais := ControllerPais.crieObj;
+  self.gridConsulta.DataSource := umaControllerPais.GetDS;
+  self.edt_Pesquisar.Text := '';
+  umFrmCadastroPais := TFrmCadastroPais.Create(nil);
 end;
 
 end.

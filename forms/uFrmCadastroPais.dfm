@@ -1,20 +1,21 @@
 inherited FrmCadastroPais: TFrmCadastroPais
-  Left = 49
+  Left = 242
+  Top = 222
   BorderStyle = bsSingle
   Caption = 'Cadastro Pa'#237's'
-  ClientHeight = 150
-  ClientWidth = 427
+  ClientHeight = 134
+  ClientWidth = 418
   Position = poDesigned
-  ExplicitWidth = 433
-  ExplicitHeight = 179
+  ExplicitWidth = 424
+  ExplicitHeight = 163
   PixelsPerInch = 96
   TextHeight = 13
   object lbl_Nome: TLabel [1]
     Left = 72
     Top = 8
-    Width = 36
+    Width = 33
     Height = 13
-    Caption = 'Nome *'
+    Caption = 'Nome*'
   end
   object lbl_Ddi: TLabel [2]
     Left = 360
@@ -24,8 +25,8 @@ inherited FrmCadastroPais: TFrmCadastroPais
     Caption = 'DDI'
   end
   inherited lbl_Obrigatorio: TLabel
-    Top = 102
-    ExplicitTop = 102
+    Top = 100
+    ExplicitTop = 100
   end
   inherited btn_Salvar: TButton
     Left = 244
@@ -41,11 +42,11 @@ inherited FrmCadastroPais: TFrmCadastroPais
     ExplicitTop = 88
   end
   inherited dataStatus: TStatusBar
-    Top = 131
-    Width = 427
+    Top = 115
+    Width = 418
     ExplicitLeft = 0
-    ExplicitTop = 202
-    ExplicitWidth = 302
+    ExplicitTop = 131
+    ExplicitWidth = 427
   end
   object edt_Nome: TEdit
     Left = 72
