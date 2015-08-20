@@ -58,6 +58,10 @@ begin
     begin
       umPais.setNome(edt_Nome.Text);
       umPais.setDdi(edt_Ddi.Text);
+      self.edt_Nome.Enabled := false;
+      self.edt_Ddi.Enabled := false;
+      self.btn_Salvar.Enabled := false;
+      self.btn_Sair.Enabled := false;
       self.Close;
       showMessage(umaControllerPais.Salvar(umPais));
     end
@@ -65,8 +69,10 @@ begin
     begin
       botaoSelecionado:= MessageDlg('ATENÇÃO! Deseja realmente excluir o Pais "' + umPais.getNome + '"',mtWarning, mbOKCancel, 0);
       if botaoSelecionado = mrOK then
+      begin
+        self.Close;
         showMessage(umaControllerPais.Excluir(umPais));
-      self.Close;
+      end;
     end;
 end;
 

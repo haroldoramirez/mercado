@@ -46,8 +46,8 @@ end;
 
 function DaoPais.GetDS: TDataSource;
 begin
-    Self.AtualizaGrid;
     Result := umDM.DSPais;
+    self.AtualizaGrid;
 end;
 
 function DaoPais.Buscar(pObj: TObject): Boolean;
@@ -114,7 +114,6 @@ begin
         umPais.setDataCadastro(DQPaisdatacadastro.AsDateTime);
         umPais.setDataAlteracao(DQPaisdataalteracao.AsDateTime);
     end;
-    Self.AtualizaGrid;
     result := umPais;
 end;
 
@@ -135,7 +134,7 @@ begin
 
       umDM.FDTransaction.CommitRetaining;
 
-      msg := 'O País ' + umPais.getNome + ' Foi Excluido com sucesso!';
+      msg := 'O País ' + umPais.getNome + ' foi excluido com sucesso!';
 
     except
     on e: Exception do
@@ -144,7 +143,6 @@ begin
         msg := 'Nao foi possivel excluir o Pais "' + umPais.getNome + '" Erro: '+e.Message;
       end;
     end;
-    Self.AtualizaGrid;
     Result := msg;
 end;
 
@@ -191,7 +189,7 @@ begin
         msg := 'Nao foi possivel salvar o Pais ' + umPais.getNome + 'Erro: '+e.Message;
       end;
     end;
-    Self.AtualizaGrid;
     Result := msg;
+    self.AtualizaGrid;
 end;
 end.

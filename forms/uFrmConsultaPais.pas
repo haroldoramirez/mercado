@@ -38,7 +38,7 @@ procedure TConsultaPais.btn_AlterarClick(Sender: TObject);
 begin
   inherited;
   umPais.setId(0);
-  umaControllerPais.Carrega(umPais);
+  umPais := Pais(umaControllerPais.Carrega(umPais));
 
   if (umPais.getId = 0) then
     MessageDlg('ATENÇÃO: Não há cadastro para ser editado!',mtWarning,[mbOK],0)
@@ -46,6 +46,8 @@ begin
   begin
     umFrmCadastroPais.conhecaObj(umPais, umaControllerPais);
     umFrmCadastroPais.btn_Salvar.Caption := '&Salvar';
+    umFrmCadastroPais.btn_Salvar.Enabled := true;
+    umFrmCadastroPais.btn_Sair.Enabled := true;
     umFrmCadastroPais.carregaObj;
     umFrmCadastroPais.ShowModal;
   end;
@@ -66,6 +68,8 @@ begin
     umFrmCadastroPais.carregaObj;
     umFrmCadastroPais.edt_Nome.Enabled := false;
     umFrmCadastroPais.edt_Ddi.Enabled := false;
+    umFrmCadastroPais.btn_Salvar.Enabled := true;
+    umFrmCadastroPais.btn_Sair.Enabled := true;
     umFrmCadastroPais.ShowModal;
   end;
 end;
@@ -76,6 +80,8 @@ begin
   if umPais.getId <> 0 then
     umPais.crieObj;
 
+  umFrmCadastroPais.btn_Salvar.Enabled := True;
+  umFrmCadastroPais.btn_Sair.Enabled := True;
   umFrmCadastroPais.btn_Salvar.Caption := '&Salvar';
   umFrmCadastroPais.conhecaObj(umPais, umaControllerPais);
 
