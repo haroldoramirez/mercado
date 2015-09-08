@@ -70,11 +70,39 @@ object DM: TDM
     Top = 192
   end
   object DQEstado: TFDQuery
+    Active = True
     Connection = Mercado
     SQL.Strings = (
       'select * from estado')
     Left = 160
     Top = 264
+    object DQEstadoidEstado: TIntegerField
+      FieldName = 'idEstado'
+      Origin = '"idEstado"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object DQEstadonome: TWideStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Size = 50
+    end
+    object DQEstadouf: TWideStringField
+      FieldName = 'uf'
+      Origin = 'uf'
+      Size = 2
+    end
+    object DQEstadocodPais: TIntegerField
+      FieldName = 'codPais'
+      Origin = '"codPais"'
+    end
+    object DQEstadodatacadastro: TDateField
+      FieldName = 'datacadastro'
+      Origin = 'datacadastro'
+    end
+    object DQEstadodataalteracao: TDateField
+      FieldName = 'dataalteracao'
+      Origin = 'dataalteracao'
+    end
   end
   object DSCidade: TDataSource
     DataSet = DQCidade

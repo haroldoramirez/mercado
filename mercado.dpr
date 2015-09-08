@@ -32,7 +32,10 @@ uses
   uControllerPais in 'controllers\uControllerPais.pas',
   uDaoPais in 'dao\uDaoPais.pas',
   uSingleton in 'uSingleton.pas',
-  uFrmCadastroPais in 'forms\uFrmCadastroPais.pas' {FrmCadastroPais};
+  uFrmCadastroPais in 'forms\uFrmCadastroPais.pas' {FrmCadastroPais},
+  uDaoEstado in 'dao\uDaoEstado.pas',
+  uControllerEstado in 'controllers\uControllerEstado.pas',
+  uFrmCadastroEstado in 'forms\uFrmCadastroEstado.pas' {FrmCadastroEstado};
 
 {$R *.res}
 

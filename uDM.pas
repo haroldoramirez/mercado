@@ -27,6 +27,12 @@ type
     DQPaisddi: TWideStringField;
     DQPaisdatacadastro: TDateField;
     DQPaisdataalteracao: TDateField;
+    DQEstadoidEstado: TIntegerField;
+    DQEstadonome: TWideStringField;
+    DQEstadouf: TWideStringField;
+    DQEstadocodPais: TIntegerField;
+    DQEstadodatacadastro: TDateField;
+    DQEstadodataalteracao: TDateField;
   private
     { Private declarations }
   public

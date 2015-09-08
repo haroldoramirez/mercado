@@ -10,11 +10,11 @@ interface
     public
         constructor crieObj;
         destructor destrua_se;
-        function Salvar(pObj: TObject): string;      virtual;
-        function GetDS : TDataSource;                virtual;
-        function Carrega(pObj: TObject): TObject;    virtual;
-        function Buscar(pObj : TObject) : Boolean;   virtual;
-        function Excluir(pObj : TObject) : string;   virtual;
+        function Salvar(pObj: TObject): string;      override;
+        function GetDS : TDataSource;                override;
+        function Carrega(pObj: TObject): TObject;    override;
+        function Buscar(pObj : TObject) : Boolean;   override;
+        function Excluir(pObj : TObject) : string;   override;
     end;
 
 implementation
