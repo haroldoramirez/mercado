@@ -57,7 +57,7 @@ procedure TConsultaPais.btn_ExcluirClick(Sender: TObject);
 begin
   inherited;
   umPais.setId(0);
-  umaControllerPais.Carrega(umPais);
+  umPais := Pais(umaControllerPais.Carrega(umPais));
 
   if (umPais.getId = 0) then
     MessageDlg('ATENÇÃO: Não há cadastro para ser excluido!',mtWarning,[mbOK],0)

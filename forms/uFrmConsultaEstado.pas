@@ -14,6 +14,7 @@ type
     procedure btn_PesquisarClick(Sender: TObject);
     procedure btn_NovoClick(Sender: TObject);
     procedure btn_AlterarClick(Sender: TObject);
+    procedure btn_ExcluirClick(Sender: TObject);
   private
     { Private declarations }
     umEstado : Estado;
@@ -50,6 +51,28 @@ begin
     umFrmCadastroEstado.carregaObj;
     umFrmCadastroEstado.ShowModal;
   end;
+end;
+
+procedure TConsultaEstado.btn_ExcluirClick(Sender: TObject);
+begin
+  inherited;
+  umEstado.setId(0);
+  umEstado := Estado(umaControllerEstado.Carrega(umEstado));
+
+  if (umEstado.getId = 0) then
+    MessageDlg('ATENÇÃO: Não há cadastro para ser excluido!',mtWarning,[mbOK],0)
+  else
+    begin
+      umFrmCadastroEstado.conhecaObj(umEstado, umaControllerEstado);
+      umFrmCadastroEstado.btn_Salvar.Caption := '&Excluir';
+      umFrmCadastroEstado.carregaObj;
+      umFrmCadastroEstado.edt_Nome.Enabled := false;
+      umFrmCadastroEstado.edt_Uf.Enabled := false;
+      umFrmCadastroEstado.edt_Pais.Enabled := false;
+      umFrmCadastroEstado.btn_Consultar.Enabled := false;
+      umFrmCadastroEstado.ShowModal;
+    end;
+
 end;
 
 procedure TConsultaEstado.btn_NovoClick(Sender: TObject);

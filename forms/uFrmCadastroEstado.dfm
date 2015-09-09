@@ -56,6 +56,7 @@ inherited FrmCadastroEstado: TFrmCadastroEstado
     Top = 27
     Width = 193
     Height = 21
+    MaxLength = 20
     TabOrder = 4
   end
   object edt_Uf: TEdit
@@ -63,6 +64,7 @@ inherited FrmCadastroEstado: TFrmCadastroEstado
     Top = 27
     Width = 31
     Height = 21
+    MaxLength = 3
     TabOrder = 5
   end
   object edt_Pais: TEdit
@@ -70,6 +72,7 @@ inherited FrmCadastroEstado: TFrmCadastroEstado
     Top = 27
     Width = 121
     Height = 21
+    MaxLength = 11
     TabOrder = 6
   end
   object btn_Consultar: TButton
