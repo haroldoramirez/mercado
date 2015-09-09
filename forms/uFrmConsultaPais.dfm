@@ -7,7 +7,6 @@ inherited ConsultaPais: TConsultaPais
   ClientWidth = 611
   Position = poDesigned
   ExplicitWidth = 617
-  ExplicitHeight = 448
   PixelsPerInch = 96
   TextHeight = 13
   inherited btn_Novo: TButton

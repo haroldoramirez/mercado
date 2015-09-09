@@ -67,17 +67,6 @@ begin
             sql := sql+e;
         sql := sql+' nome like '+quotedstr('%'+umEstado.getNome+'%');
     end;
-    if umEstado.getUmPais.getId <> 0 then
-    begin
-        if prim then
-         begin
-            prim := false;
-            sql := sql+onde;
-        end
-        else
-            sql := sql+e;
-        sql := sql+' idpais = '+inttostr(umEstado.getUmPais.getId);
-    end;
     with umDM do
     begin
         DQEstado.Close;
@@ -111,7 +100,7 @@ begin
         umEstado.setNome(DQEstadonome.AsString);
         umEstado.setUf(DQEstadouf.AsString);
         umEstado.setDataCadastro(DQEstadodatacadastro.AsDateTime);
-        umEstado.setDataAlteracao(DQPaisdataalteracao.AsDateTime);
+        umEstado.setDataAlteracao(DQEstadodataalteracao.AsDateTime);
 
         //Busca o país referente ao estado
         umEstado.getUmPais.setId(DQEstadocodPais.AsInteger);
@@ -154,8 +143,8 @@ begin
     on e: Exception do
       begin
         umDM.FDTransaction.RollbackRetaining;
-        if pos('chave estrangeira',e.Message)>0 then
-          result := 'Ocorreu um erro! O Estado não pode ser excluído pois ja está sendo usado pelo sistema.'
+        if pos('foreign key',e.Message)>0 then
+          msg := 'Ocorreu um erro! O Estado não pode ser excluído pois ja está sendo utilizado pelo sistema.'
         else
           msg := 'Nao foi possivel excluir o Estado "'+ umEstado.getNome +'" Erro: '+e.Message;
       end;
@@ -200,14 +189,14 @@ begin
           umDM.DQEstadodatacadastro.Value := now;
         end
       else
-        umDM.DQPais.Edit;
+        umDM.DQEstado.Edit;
 
       umDM.DQEstadodataalteracao.Value := now;
       umDM.DQEstadonome.Value := umEstado.getNome;
       umDM.DQEstadouf.Value := umEstado.getUf;
       umDM.DQEstadocodPais.Value := umEstado.getUmPais.getId;
 
-      umDM.DQPais.Post;
+      umDM.DQEstado.Post;
       umDM.FDTransaction.Commit;
 
       msg := 'O Estado "'+ umEstado.getNome +'" foi salvo com sucesso!';

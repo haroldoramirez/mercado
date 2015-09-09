@@ -51,7 +51,6 @@ begin
 end;
 
 function DaoPais.Buscar(pObj: TObject): Boolean;
-
 var
     prim: Boolean;
     sql, e, onde: string;
@@ -62,6 +61,17 @@ begin
     prim := true;
     umPais := Pais(pObj);
     sql := 'select * from pais';
+    if umPais.getId <> 0 then
+    begin
+        if prim then  //SE FOR O PRIMEIRO, SETA COMO FLAG COMO FALSO PQ É O PRIMEIRO
+        begin
+            prim := false;
+            sql := sql+onde;
+        end
+        else //SE NAO, COLOCA CLAUSULA AND PARA JUNTAR CONDIÇOES
+            sql := sql+e;
+        sql := sql+' idPais = '+inttostr(umPais.getId); //COLOCA CONDIÇAO NO SQL
+    end;
     if umPais.getNome <> '' then
     begin
         if prim then
@@ -104,7 +114,7 @@ begin
       if umPais.getId <> 0 then
         begin
           DQPais.Close;
-          DQPais.SQL.Text := 'select * from pais where idpais = '+IntToStr(umPais.getId);
+          DQPais.SQL.Text := 'select * from pais where idPais = '+IntToStr(umPais.getId);
           DQPais.Open;
         end;
 
@@ -134,13 +144,16 @@ begin
 
       umDM.FDTransaction.CommitRetaining;
 
-      msg := 'O País ' + umPais.getNome + ' foi excluido com sucesso!';
+      msg := 'O País "'+ umPais.getNome +'" foi excluido com sucesso!';
 
     except
     on e: Exception do
       begin
         umDM.FDTransaction.RollbackRetaining;
-        msg := 'Nao foi possivel excluir o Pais "' + umPais.getNome + '" Erro: '+e.Message;
+        if pos('foreign key',e.Message) > 0 then
+          msg := 'Ocorreu um erro! O País não pode ser excluído pois ja está sendo utilizado pelo sistema.'
+        else
+          msg := 'Não foi possivel excluir o País "' + umPais.getNome + '" Erro: '+e.Message;
       end;
     end;
     Result := msg;
@@ -181,12 +194,12 @@ begin
       umDM.DQPais.Post;
       umDM.FDTransaction.Commit;
 
-      msg := 'O Pais "' + umPais.getNome + '" foi salvo com sucesso!';
+      msg := 'O País "' + umPais.getNome + '" foi salvo com sucesso!';
     except
     on e: Exception do
       begin
         umDM.FDTransaction.Rollback;
-        msg := 'Nao foi possivel salvar o Pais ' + umPais.getNome + 'Erro: '+e.Message;
+        msg := 'Não foi possível salvar o Pais ' + umPais.getNome + 'Erro: '+e.Message;
       end;
     end;
     Result := msg;

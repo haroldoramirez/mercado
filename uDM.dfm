@@ -70,7 +70,6 @@ object DM: TDM
     Top = 192
   end
   object DQEstado: TFDQuery
-    Active = True
     Connection = Mercado
     SQL.Strings = (
       'select * from estado')

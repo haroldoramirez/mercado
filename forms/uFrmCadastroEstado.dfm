@@ -13,9 +13,9 @@ inherited FrmCadastroEstado: TFrmCadastroEstado
   object lbl_Nome: TLabel [2]
     Left = 72
     Top = 8
-    Width = 27
+    Width = 33
     Height = 13
-    Caption = 'Nome'
+    Caption = 'Nome*'
   end
   object lbl_Uf: TLabel [3]
     Left = 280
@@ -27,9 +27,9 @@ inherited FrmCadastroEstado: TFrmCadastroEstado
   object lbl_Pais: TLabel [4]
     Left = 328
     Top = 8
-    Width = 19
+    Width = 25
     Height = 13
-    Caption = 'Pa'#237's'
+    Caption = 'Pa'#237's*'
   end
   inherited btn_Salvar: TButton
     Left = 374
@@ -39,15 +39,17 @@ inherited FrmCadastroEstado: TFrmCadastroEstado
     ExplicitTop = 88
   end
   inherited btn_Sair: TButton
-    Left = 455
-    Top = 88
-    ExplicitLeft = 455
-    ExplicitTop = 88
+    Left = 457
+    Top = 89
+    ExplicitLeft = 457
+    ExplicitTop = 89
   end
   inherited dataStatus: TStatusBar
     Top = 120
     Width = 540
     ExplicitLeft = 0
+    ExplicitTop = 120
+    ExplicitWidth = 540
   end
   object edt_Nome: TEdit
     Left = 72
@@ -70,12 +72,13 @@ inherited FrmCadastroEstado: TFrmCadastroEstado
     Height = 21
     TabOrder = 6
   end
-  object Consultar: TButton
+  object btn_Consultar: TButton
     Left = 455
     Top = 25
     Width = 75
     Height = 25
-    Caption = 'Consultar'
+    Caption = '&Consultar'
     TabOrder = 7
+    OnClick = btn_ConsultarClick
   end
 end

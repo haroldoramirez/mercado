@@ -13,6 +13,7 @@ type
     procedure btn_SairClick(Sender: TObject);
     procedure btn_PesquisarClick(Sender: TObject);
     procedure btn_NovoClick(Sender: TObject);
+    procedure btn_AlterarClick(Sender: TObject);
   private
     { Private declarations }
     umEstado : Estado;
@@ -31,6 +32,25 @@ implementation
 {$R *.dfm}
 
 { TConsultaEstado }
+
+procedure TConsultaEstado.btn_AlterarClick(Sender: TObject);
+begin
+  inherited;
+  umEstado.setId(0);
+  umEstado := Estado(umaControllerEstado.Carrega(umEstado));
+
+  if (umEstado.getId = 0) then
+    MessageDlg('ATENÇÃO: Não há cadastro para ser editado!',mtWarning,[mbOK],0)
+  else
+  begin
+    umFrmCadastroEstado.conhecaObj(umEstado, umaControllerEstado);
+    umFrmCadastroEstado.btn_Salvar.Caption := '&Salvar';
+    umFrmCadastroEstado.btn_Salvar.Enabled := true;
+    umFrmCadastroEstado.btn_Sair.Enabled := true;
+    umFrmCadastroEstado.carregaObj;
+    umFrmCadastroEstado.ShowModal;
+  end;
+end;
 
 procedure TConsultaEstado.btn_NovoClick(Sender: TObject);
 begin

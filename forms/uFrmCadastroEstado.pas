@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadastroPai, Vcl.ComCtrls, Vcl.StdCtrls,
-  uEstado, uControllerEstado;
+  uEstado, uControllerEstado, uFrmConsultaPais, uValidacao;
 
 type
   TFrmCadastroEstado = class(TCadastroPai)
@@ -15,12 +15,16 @@ type
     edt_Uf: TEdit;
     lbl_Pais: TLabel;
     edt_Pais: TEdit;
-    Consultar: TButton;
+    btn_Consultar: TButton;
     procedure btn_SalvarClick(Sender: TObject);
+    procedure btn_ConsultarClick(Sender: TObject);
+    procedure btn_SairClick(Sender: TObject);
   private
     { Private declarations }
     umEstado: Estado;
     umaControllerEstado: ControllerEstado;
+    umFrmConsultaPais: TConsultaPais;
+    umaValidacao : Validacao;
   public
     { Public declarations }
     procedure conhecaObj(pEstado: Estado; pControllerEstado: ControllerEstado);
@@ -38,6 +42,13 @@ implementation
 
 { TFrmCadastroEstado }
 
+procedure TFrmCadastroEstado.btn_SairClick(Sender: TObject);
+begin
+  inherited;
+  self.habilitaCampos;
+  umaValidacao.destrua_se;
+end;
+
 procedure TFrmCadastroEstado.btn_SalvarClick(Sender: TObject);
 var
   msg : String;
@@ -46,9 +57,15 @@ begin
   inherited;
   if edt_Nome.Text = '' then
     begin
-      showmessage('O campo nome não pode estar em branco!');
+      showMessage('O campo nome não pode estar em branco!');
       edt_Nome.SetFocus;
     end
+  else
+    if ((not umaValidacao.validarUF(edt_UF.Text) and (edt_Pais.Text = 'Brasil') OR (edt_Pais.Text = 'Brazil'))) then
+  begin
+    ShowMessage('UF do estado inválida!');
+    edt_Uf.SetFocus;
+  end
   else
   if edt_Pais.Text = '' then
     begin
@@ -60,10 +77,13 @@ begin
     begin
       umEstado.setNome(edt_Nome.Text);
       umEstado.setUf(edt_Uf.Text);
+      umEstado.getUmPais.setNome(edt_Pais.Text);
       self.edt_Nome.Enabled := false;
       self.edt_Uf.Enabled := false;
+      self.edt_Pais.Enabled := false;
       self.btn_Salvar.Enabled := false;
       self.btn_Sair.Enabled := false;
+      self.btn_Consultar.Enabled := false;
       self.Close;
       showMessage(umaControllerEstado.Salvar(umEstado));
     end
@@ -80,7 +100,11 @@ end;
 
 procedure TFrmCadastroEstado.carregaObj;
 begin
-
+    self.edt_Codigo.Text := inttostr(umEstado.getId);
+    self.edt_Nome.Text := umEstado.getNome;
+    self.edt_Pais.Text := umEstado.getUmPais.getNome;
+    self.dataStatus.Panels[0].Text := 'Data de Cadastro: '+datetoStr(umEstado.getDataCadastro);
+    self.dataStatus.Panels[1].Text := 'Data de Alteração: '+datetoStr(umEstado.getDataAlteracao);
 end;
 
 procedure TFrmCadastroEstado.conhecaObj(pEstado: Estado;
@@ -89,18 +113,35 @@ begin
     umEstado := pEstado;
     umaControllerEstado := pControllerEstado;
 
+    umaValidacao := Validacao.crieObj;
+
     self.habilitaCampos;
     self.limpaCampos;
 end;
 
+procedure TFrmCadastroEstado.btn_ConsultarClick(Sender: TObject);
+begin
+  inherited;
+  umFrmConsultaPais := TConsultaPais.Create(nil);
+  umFrmConsultaPais.conhecaObj(umEstado.getUmPais);
+  umFrmConsultaPais.btn_Sair.Caption := 'S&elecionar';
+  umFrmConsultaPais.ShowModal;
+  self.edt_Pais.Text := umEstado.getUmPais.getNome;
+end;
+
 procedure TFrmCadastroEstado.habilitaCampos;
 begin
-
+    self.edt_Nome.Enabled := true;
+    self.edt_Uf.Enabled := true;
+    self.edt_Pais.Enabled := true;
+    self.btn_Consultar.Enabled := true;
 end;
 
 procedure TFrmCadastroEstado.limpaCampos;
 begin
-
+    self.edt_Nome.Clear;
+    self.edt_Uf.Clear;
+    self.edt_Pais.Clear;
 end;
 
 end.

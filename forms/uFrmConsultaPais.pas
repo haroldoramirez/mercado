@@ -108,7 +108,7 @@ end;
 procedure TConsultaPais.btn_SairClick(Sender: TObject);
 begin
   inherited;
-  if self.btn_Sair.Caption = '&Selecionar' then
+  if self.btn_Sair.Caption = 'S&elecionar' then
     begin
       umPais.setId(0);
       umaControllerPais.Carrega(umPais);

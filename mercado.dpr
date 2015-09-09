@@ -35,7 +35,8 @@ uses
   uFrmCadastroPais in 'forms\uFrmCadastroPais.pas' {FrmCadastroPais},
   uDaoEstado in 'dao\uDaoEstado.pas',
   uControllerEstado in 'controllers\uControllerEstado.pas',
-  uFrmCadastroEstado in 'forms\uFrmCadastroEstado.pas' {FrmCadastroEstado};
+  uFrmCadastroEstado in 'forms\uFrmCadastroEstado.pas' {FrmCadastroEstado},
+  uValidacao in 'uValidacao.pas';
 
 {$R *.res}
 

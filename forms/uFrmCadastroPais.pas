@@ -50,8 +50,8 @@ begin
   inherited;
   if edt_Nome.Text = '' then
     begin
-      showmessage('O campo nome não pode estar em branco!');
-      edt_Nome.SetFocus;
+     MessageDlg('O campo nome não pode estar em branco!',  mtInformation, [mbOK], 0);
+      edt_Nome.SetFocus
     end
   else
   if self.btn_Salvar.Caption = '&Salvar' then
@@ -67,11 +67,11 @@ begin
     end
     else
     begin
-      botaoSelecionado:= MessageDlg('ATENÇÃO! Deseja realmente excluir o Pais "' + umPais.getNome + '"',mtWarning, mbOKCancel, 0);
+      botaoSelecionado:= MessageDlg('ATENÇÃO! Deseja realmente excluir o Pais? "' + umPais.getNome + '"',mtWarning, mbOKCancel, 0);
       if botaoSelecionado = mrOK then
       begin
-        self.Close;
         showMessage(umaControllerPais.Excluir(umPais));
+        self.Close;
       end;
     end;
 end;
